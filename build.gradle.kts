@@ -17,7 +17,7 @@ dependencies {
     implementation("io.quarkus:quarkus-arc")
     implementation("io.quarkus:quarkus-rest")
     implementation("io.quarkus:quarkus-security")
-    implementation("io.quarkiverse.amazonservices:quarkus-amazon-dynamodb-enhanced:2.16.2")
+    implementation("io.quarkiverse.amazonservices:quarkus-amazon-dynamodb-enhanced:2.17.0")
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
 }

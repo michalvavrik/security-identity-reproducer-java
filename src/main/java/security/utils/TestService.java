@@ -2,8 +2,11 @@ package security.utils;
 
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.control.ActivateRequestContext;
 import jakarta.inject.Inject;
+
+import java.util.Set;
 
 @ApplicationScoped
 public class TestService {
@@ -15,7 +18,7 @@ public class TestService {
         this.repository = repository;
     }
 
-    @ActivateRequestContext
+//    @ActivateRequestContext
     public Uni<User> getUser() {
         return repository.getUser();
     }

@@ -1,5 +1,7 @@
 package security.utils;
 
+import io.quarkus.arc.Arc;
+import io.quarkus.logging.Log;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
@@ -20,9 +22,23 @@ public class DynamoDbRepository {
     }
 
     public Uni<User> getUser() {
+        Log.info("get user ////////////////////");
         return Uni.createFrom().completionStage(
-                () -> table.getItem(r -> r.key(k -> k.partitionValue("jakub@gmail.com")))
-        );
+                () -> {
+                    Log.info("/////////// get item");
+                    return table.getItem(r -> {
+                        Log.info("////// get key");
+                        r.key(k -> {
+                            Log.info("/////// get email");
+                            k.partitionValue("jakub@gmail.com");
+                        });
+                    });
+                }
+        ).invoke(r -> Log.info("//////// after " + Arc.container().requestContext().isActive() + " user " + r));
+//        User user = new User();
+//        user.setEmail("jakub@gmail.com");
+//        user.setRoles(Set.of("admin"));
+//        return Uni.createFrom().item(user);
     }
 
     public Uni<Void> saveUser() {
